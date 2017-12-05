@@ -21,12 +21,25 @@ def position_taken? (board, index)
   end
 end
 
-def move (board, index, token="X")
-  board[index] = token
+def input_to_index(input)
+  index = input.to_i - 1
+  return index
 end
 
-def turn 
+def move (board, index, player = "X")
+  board[index] = player
+  return board
+end
+
+def turn(board,index)
   puts "Please enter 1-9:"
   input = gets.String
+  input_to_index(input)
+  
+  if valid_move?(board,index)
+    move(board, index)
+  else 
+    turn(board,index)
+  end
   
 end
